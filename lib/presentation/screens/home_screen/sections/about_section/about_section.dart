@@ -11,18 +11,7 @@ class AboutSection extends StatelessWidget {
       child: Center(
         child: Text('About'),
       ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.transparent,
-            Colors.black,
-            Colors.black,
-            Colors.black
-          ],
-        ),
-      ),
+      decoration: BoxDecoration(color: Colors.black),
     );
   }
 }

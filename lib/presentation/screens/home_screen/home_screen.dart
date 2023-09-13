@@ -10,6 +10,7 @@ import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'sections/nav_section/nav_bar.dart';
+import 'sections/nav_section/nav_desktop.dart';
 
 final ItemScrollController itemScrollController = ItemScrollController();
 List<Color> colorList = [
@@ -29,7 +30,38 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
         key: context.read<NavBarCubit>().scaffoldKey,
         endDrawerEnableOpenDragGesture: true,
-        drawer: !Responsive.isDestop(context) ? const Drawer() : null,
+        drawer: !Responsive.isDestop(context)
+            ? Drawer(
+                backgroundColor: const Color.fromARGB(115, 0, 0, 0),
+                child: BlocBuilder<NavBarCubit, NavBarState>(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: buttonLabels.length,
+                            itemBuilder: (context, index) => ListTile(
+                              leading: NavTextButton(
+                                label: buttonLabels[index],
+                                selected: state.index == index,
+                                onPressed: () {
+                                  context
+                                      .read<NavBarCubit>()
+                                      .selectSection(index);
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              )
+            : null,
         body: Stack(
           children: [
             SizedBox(
@@ -44,7 +76,6 @@ class HomeScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  
                 ],
               ),
             ),

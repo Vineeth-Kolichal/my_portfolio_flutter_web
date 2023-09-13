@@ -100,7 +100,7 @@ class _NavTextButtonState extends State<NavTextButton> {
             fontSize: 18,
             fontWeight: FontWeight.w700,
             color: hover
-                ? Colors.red
+                ? Colors.yellow
                 : widget.selected
                     ? Colors.white
                     : Colors.grey,
