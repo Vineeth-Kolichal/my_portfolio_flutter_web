@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:my_portfolio_site/business_logic/nav_bar_cubit/nav_bar_cubit.dart';
 import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
 import 'package:my_portfolio_site/presentation/widgets/space.dart';
+import 'package:my_portfolio_site/util/colors.dart';
 import 'package:my_portfolio_site/util/icons.dart';
 import 'dart:html' as html;
 
@@ -10,7 +14,21 @@ class HomeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
+    // context.read<NavBarCubit>().selectSection(0);
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.transparent,
+            Colors.transparent,
+            Colors.transparent,
+            Colors.transparent,
+            Colors.black
+          ],
+        ),
+      ),
       height: size.height,
       child: LayoutBuilder(builder: (context, constrains) {
         return Center(
@@ -19,21 +37,21 @@ class HomeSection extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned(
-                  right: Responsive.isDestop(context) ? 10 : null,
+                  right: Responsive.isDestop(context) ? 10 : 0,
                   bottom: 0,
                   child: Image.asset(
                     'assets/images/image.png',
                     scale: Responsive.isDestop(context)
-                        ? 0.5
+                        ? 3
                         : Responsive.isTabltet(context)
-                            ? 0.6
-                            : 1,
+                            ? 3
+                            : 5.5,
                   ),
                 ),
                 Container(
                   height: size.height,
                   width: size.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -57,37 +75,39 @@ class HomeSection extends StatelessWidget {
                             ? size.width * 0.2
                             : size.width * 0.25,
                       ),
-                      Text(
+                      const Text(
                         "Hi, I'm",
-                        style: TextStyle(fontSize: 30),
+                        style: TextStyle(fontSize: 35),
                       ),
                       Text(
                         'Vineeth Chandran',
                         style: TextStyle(
-                            fontSize: Responsive.isDestop(context) ? 50 : 30,
+                            fontSize: Responsive.isDestop(context) ? 80 : 35,
                             fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
                         width: Responsive.isDestop(context)
-                            ? size.width * 0.26
+                            ? size.width * 0.3
                             : size.width * 0.7,
-                        child: Divider(
+                        child: const Divider(
                           color: Colors.yellow,
                           thickness: 7,
                         ),
                       ),
                       Container(
-                        color: !Responsive.isDestop(context)
-                            ? Color.fromARGB(94, 70, 69, 69)
-                            : null,
-                        width: Responsive.isDestop(context)
-                            ? size.width * 0.26
-                            : size.width * 0.7,
-                        child: Text(
-                          "I am a self-directed Flutter developer with one year of hands-on experience. I have a bachelor's degree in computer science from the Kannur University, Kerala. I am proficient in Flutter, Dart, and Android development. I am also familiar with other programming languages such as Java, Go, C, and C++.",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
+                          color: !Responsive.isDestop(context)
+                              ? const Color.fromARGB(94, 70, 69, 69)
+                              : null,
+                          width: Responsive.isDestop(context)
+                              ? size.width * 0.3
+                              : size.width * 0.7,
+                          child: Text(
+                            'Flutter Developer',
+                            style: TextStyle(
+                                fontSize:
+                                    Responsive.isDestop(context) ? 30 : 20,
+                                letterSpacing: 15),
+                          )),
                       Space.y(20),
                       SizedBox(
                         width: Responsive.isDestop(context)
@@ -111,7 +131,9 @@ class HomeSection extends StatelessWidget {
                                     "_blank");
                               },
                               icon: CustomIcons.github,
-                            )
+                            ),
+                            Space.x(10),
+                            const DownloadResumeButton()
                           ],
                         ),
                       )
@@ -124,6 +146,51 @@ class HomeSection extends StatelessWidget {
         );
       }),
     );
+  }
+}
+
+class DownloadResumeButton extends StatefulWidget {
+  const DownloadResumeButton({
+    super.key,
+  });
+
+  @override
+  State<DownloadResumeButton> createState() => _DownloadResumeButtonState();
+}
+
+class _DownloadResumeButtonState extends State<DownloadResumeButton> {
+  bool isHover = false;
+  @override
+  Widget build(BuildContext context) {
+    if (Responsive.isDestop(context) || Responsive.isTabltet(context)) {
+      return InkWell(
+        onHover: (value) {
+          setState(() {
+            isHover = value;
+          });
+        },
+        onTap: () {},
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color:
+                  isHover ? Colors.yellow : const Color.fromARGB(166, 0, 0, 0)),
+          child: Center(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              'Download my resume',
+              style: TextStyle(
+                  color: isHover ? Colors.black : Colors.yellow,
+                  fontWeight: FontWeight.w800),
+            ),
+          )),
+        ),
+      );
+    } else {
+      return CircleButton(onTap: () {}, icon: Iconsax.document_download);
+    }
   }
 }
 

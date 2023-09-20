@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_portfolio_site/business_logic/nav_bar_cubit/nav_bar_cubit.dart';
+import 'package:my_portfolio_site/presentation/widgets/name_in_navbar.dart';
 import 'package:my_portfolio_site/presentation/widgets/nav_bar_widget.dart';
 import 'package:my_portfolio_site/presentation/widgets/space.dart';
 
@@ -42,25 +43,7 @@ class NavDesktop extends StatelessWidget {
   }
 }
 
-class NameInNavBar extends StatefulWidget {
-  const NameInNavBar({
-    super.key,
-  });
 
-  @override
-  State<NameInNavBar> createState() => _NameInNavBarState();
-}
-
-class _NameInNavBarState extends State<NameInNavBar> {
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      curve: Curves.easeOut,
-      duration: Duration(milliseconds: 5000),
-      child: Text('Vineeth Chandran'),
-    );
-  }
-}
 
 class NavTextButton extends StatefulWidget {
   const NavTextButton({

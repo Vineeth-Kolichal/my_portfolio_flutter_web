@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,11 +12,12 @@ class NavBarCubit extends Cubit<NavBarState> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final ItemScrollController itemScrollController = ItemScrollController();
   ItemPositionsListener itemPositionsListener = ItemPositionsListener.create();
+  final ScrollOffsetListener scrollOffsetListener =
+      ScrollOffsetListener.create();
 
   NavBarCubit() : super(NavBarState.initial());
 
   void selectSection(int index) {
-   
     itemScrollController.scrollTo(
       index: index,
       duration: const Duration(seconds: 1),

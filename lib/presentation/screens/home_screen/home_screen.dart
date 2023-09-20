@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, state) {
                     return Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Expanded(
@@ -53,6 +53,17 @@ class HomeScreen extends StatelessWidget {
                                       .selectSection(index);
                                 },
                               ),
+                              trailing: index == 0
+                                  ? IconButton(
+                                      onPressed: () {
+                                        context
+                                            .read<NavBarCubit>()
+                                            .scaffoldKey
+                                            .currentState!
+                                            .closeDrawer();
+                                      },
+                                      icon: const Icon(Icons.close))
+                                  : null,
                             ),
                           ),
                         ),
@@ -80,6 +91,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             ScrollablePositionedList.builder(
+              shrinkWrap: true,
+              scrollOffsetListener:
+                  context.read<NavBarCubit>().scrollOffsetListener,
               itemScrollController:
                   context.read<NavBarCubit>().itemScrollController,
               itemCount: sections.length,
