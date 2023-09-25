@@ -169,7 +169,13 @@ class _DownloadResumeButtonState extends State<DownloadResumeButton> {
             isHover = value;
           });
         },
-        onTap: () {},
+        onTap: () {
+          html.AnchorElement anchorElement = html.AnchorElement(
+              href:
+                  'https://firebasestorage.googleapis.com/v0/b/my-portfolio-76a8d.appspot.com/o/Vineeth_Chandran_Flutter_Developer.pdf?alt=media&token=5007c1f3-a149-4588-86db-83448cbdc1ab');
+          anchorElement.download = 'Vineeth_chandran_Resume';
+          anchorElement.click();
+        },
         child: Container(
           height: 50,
           decoration: BoxDecoration(
