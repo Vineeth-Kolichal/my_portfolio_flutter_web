@@ -91,8 +91,19 @@ class _ProjectContainerState extends State<ProjectContainer> {
           width: isHover ? 375 : 330,
           height: isHover ? 425 : 380,
           decoration: BoxDecoration(
-              color: !isHover ? Color.fromARGB(255, 24, 24, 24) : Colors.black,
-              borderRadius: BorderRadius.circular(30)),
+            gradient: isHover
+                ? null
+                : LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 0, 0, 0),
+                      Color.fromARGB(255, 15, 15, 15),
+                    ],
+                  ),
+            color: isHover ? null : Colors.black,
+            borderRadius: BorderRadius.circular(30),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(children: [
