@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_portfolio_site/presentation/screens/home_screen/sections/home_section/home_section.dart';
 import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
 import 'package:my_portfolio_site/presentation/widgets/section_title.dart';
@@ -15,8 +14,8 @@ class PortfolioSection extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       //  height: size.height,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
@@ -48,9 +47,9 @@ class PortfolioSection extends StatelessWidget {
                               ? 2
                               : 1,
                       crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0,
+                      mainAxisSpacing: 20.0,
                       children: List.generate(6, (index) {
-                        return Center(
+                        return const Center(
                           child: ProjectContainer(),
                         );
                       }),
@@ -88,16 +87,16 @@ class _ProjectContainerState extends State<ProjectContainer> {
       child: Material(
         borderRadius: BorderRadius.circular(30),
         shadowColor: Colors.grey,
-        elevation: isHover ? 10 : 0.0,
+        elevation: isHover || !Responsive.isDestop(context) ? 10 : 0.0,
         child: AnimatedContainer(
           curve: Curves.fastEaseInToSlowEaseOut,
           duration: const Duration(milliseconds: 500),
-          width: isHover ? 375 : 330,
-          height: isHover ? 425 : 380,
+          width: isHover ? 380 : 330,
+          height: isHover || !Responsive.isDestop(context) ? 425 : 400,
           decoration: BoxDecoration(
             gradient: isHover
                 ? null
-                : LinearGradient(
+                : const LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
@@ -111,9 +110,10 @@ class _ProjectContainerState extends State<ProjectContainer> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
+                //  mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
+                  const Text(
                     'Project Name',
                     style: TextStyle(fontSize: 20, color: Colors.yellow),
                   ),
@@ -123,7 +123,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     width: 260,
                     height: 140,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image: NetworkImage(
                               'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png?20220228223904',
                             ),
@@ -133,8 +133,8 @@ class _ProjectContainerState extends State<ProjectContainer> {
                   ),
                   Space.y(10),
                   ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 280),
-                    child: Text(
+                    constraints: const BoxConstraints(maxWidth: 280),
+                    child: const Text(
                       maxLines: 5,
                       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                       overflow: TextOverflow.ellipsis,
@@ -143,11 +143,14 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     ),
                   ),
                   Visibility(
-                    visible: isHover,
+                    // visible: isHover || !Responsive.isDestop(context),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircleButton(onTap: () {}, icon: CustomIcons.github)
+                        CircleButton(onTap: () {}, icon: CustomIcons.github),
+                        Space.x(20),
+                        CircleButton(
+                            onTap: () {}, icon: CustomIcons.google_play),
                       ],
                     ),
                   )

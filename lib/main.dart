@@ -38,8 +38,8 @@ class MyPortfolio extends StatelessWidget {
             fontFamily: GoogleFonts.montserrat().fontFamily),
         initialRoute: "/",
         routes: {
-          "/": (context) => HomeScreen(),
-          "/admin": (context) => AdminScreen()
+          "/": (context) => const HomeScreen(),
+          "/admin": (context) => const AdminScreen()
 
           //add more pages here
         },

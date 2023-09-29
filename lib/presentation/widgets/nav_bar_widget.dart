@@ -10,7 +10,7 @@ class NavBarWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 70,
-      color: Color.fromARGB(129, 66, 66, 66),
+      color: const Color.fromARGB(129, 66, 66, 66),
       child: LayoutBuilder(builder: (context, constraints) {
         return FractionallySizedBox(
           widthFactor: constraints.maxWidth >= 1024 ? 0.8 : 1,

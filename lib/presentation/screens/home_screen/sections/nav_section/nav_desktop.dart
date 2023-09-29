@@ -5,6 +5,8 @@ import 'package:my_portfolio_site/presentation/widgets/name_in_navbar.dart';
 import 'package:my_portfolio_site/presentation/widgets/nav_bar_widget.dart';
 import 'package:my_portfolio_site/presentation/widgets/space.dart';
 
+import '../../../../../business_logic/cubit/pointer_move_cubit.dart';
+
 class NavDesktop extends StatelessWidget {
   const NavDesktop({super.key});
 
@@ -15,7 +17,7 @@ class NavDesktop extends StatelessWidget {
         return NavBarWidget(
           leading: Flexible(
             flex: 3,
-            child: state.index != 0 ? NameInNavBar() : const SizedBox.shrink(),
+            child: state.index != 0 ? const NameInNavBar() : const SizedBox.shrink(),
           ),
           trailing: Expanded(
               flex: 2,
@@ -43,8 +45,6 @@ class NavDesktop extends StatelessWidget {
   }
 }
 
-
-
 class NavTextButton extends StatefulWidget {
   const NavTextButton({
     super.key,
@@ -65,11 +65,16 @@ class _NavTextButtonState extends State<NavTextButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.only(
+      borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
           topRight: Radius.circular(30),
           bottomLeft: Radius.circular(30)),
       onHover: (value) {
+        if (value) {
+          context.read<PointerMoveCubit>().setWidthZero(0.0);
+        } else {
+          context.read<PointerMoveCubit>().setWidthZero(30);
+        }
         setState(() {
           hover = value;
         });

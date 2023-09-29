@@ -18,4 +18,8 @@ class PointerMoveCubit extends Cubit<PointerMoveState> {
       emit(state.copyWith(isMoving: false));
     });
   }
+
+  void setWidthZero(double width) {
+    emit(state.copyWith(containerWidth: width));
+  }
 }

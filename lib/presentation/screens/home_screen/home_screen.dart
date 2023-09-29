@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_portfolio_site/business_logic/cubit/pointer_move_cubit.dart';
@@ -13,6 +15,8 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'sections/nav_section/nav_bar.dart';
 import 'sections/nav_section/nav_desktop.dart';
 
+ValueNotifier<double> positionNotifier = ValueNotifier(0.0);
+
 final ItemScrollController itemScrollController = ItemScrollController();
 List<Color> colorList = [
   Colors.transparent,
@@ -27,6 +31,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Timer(const Duration(milliseconds: 1500), () {
+      positionNotifier.value = -(size.height / 2);
+    });
 
     return Scaffold(
         key: context.read<NavBarCubit>().scaffoldKey,
@@ -114,9 +121,44 @@ class HomeScreen extends StatelessWidget {
               const PointerFollowCircle(
                 time: 200,
               ),
+              BlackHalfSection(size: size, position: 1),
+              BlackHalfSection(size: size, position: 2 * -1),
             ],
           ),
         ));
+  }
+}
+
+class BlackHalfSection extends StatelessWidget {
+  const BlackHalfSection({
+    super.key,
+    required this.size,
+    required this.position,
+  });
+
+  final Size size;
+  final int position;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: position != 1 ? 0 : null,
+      top: position == 1 ? 0 : null,
+      child: ValueListenableBuilder(
+          valueListenable: positionNotifier,
+          builder: (context, value, _) {
+            return AnimatedContainer(
+              curve: Curves.fastEaseInToSlowEaseOut,
+              duration: const Duration(milliseconds: 1000),
+              transform:
+                  Transform.translate(offset: Offset(0, value * position))
+                      .transform,
+              height: (size.height / 2),
+              width: size.width,
+              color: Colors.black,
+            );
+          }),
+    );
   }
 }
 

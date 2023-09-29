@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_portfolio_site/presentation/widgets/export_widgets.dart';
-import 'package:my_portfolio_site/util/colors.dart';
 import 'package:my_portfolio_site/util/constants.dart';
 
 String skills =
@@ -258,14 +256,14 @@ class AboutItems extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Skills',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 25,
               ),
             ),
-            Divider(
+            const Divider(
               height: 2,
               color: Colors.yellow,
             ),
@@ -273,7 +271,7 @@ class AboutItems extends StatelessWidget {
               textAlign: TextAlign.justify,
               text: TextSpan(
                   text: "Expert in : ",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -281,7 +279,7 @@ class AboutItems extends StatelessWidget {
                   children: [
                     TextSpan(
                         text: skills,
-                        style: TextStyle(
+                        style: const TextStyle(
                             height: 1.75,
                             fontSize: 20,
                             fontWeight: FontWeight.normal,
@@ -293,7 +291,7 @@ class AboutItems extends StatelessWidget {
               textAlign: TextAlign.justify,
               text: TextSpan(
                   text: "Familiar with : ",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -301,7 +299,7 @@ class AboutItems extends StatelessWidget {
                   children: [
                     TextSpan(
                         text: familiar,
-                        style: TextStyle(
+                        style: const TextStyle(
                             height: 1.75,
                             fontSize: 20,
                             fontWeight: FontWeight.normal,

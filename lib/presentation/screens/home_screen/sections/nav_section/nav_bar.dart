@@ -8,7 +8,7 @@ class NavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(
+    return const Responsive(
       desktop: NavDesktop(),
       tablet: NavTabMobile(),
       mobile: NavTabMobile(),
