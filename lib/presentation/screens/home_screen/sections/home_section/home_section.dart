@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_portfolio_site/business_logic/nav_bar_cubit/nav_bar_cubit.dart';
-import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
-import 'package:my_portfolio_site/presentation/widgets/space.dart';
+
 import 'package:my_portfolio_site/util/colors.dart';
 import 'package:my_portfolio_site/util/icons.dart';
+
 import 'dart:html' as html;
+
+import '../../../../widgets/export_widgets.dart';
 
 class HomeSection extends StatelessWidget {
   const HomeSection({super.key});
@@ -176,8 +178,10 @@ class _DownloadResumeButtonState extends State<DownloadResumeButton> {
           anchorElement.download = 'Vineeth_chandran_Resume';
           anchorElement.click();
         },
-        child: Container(
-          height: 50,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.fastEaseInToSlowEaseOut,
+          height: isHover ? 60 : 50,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
               color:
@@ -223,10 +227,15 @@ class _CircleButtonState extends State<CircleButton> {
         });
       },
       onTap: widget.onTap,
-      child: CircleAvatar(
-        backgroundColor:
-            isHover ? Colors.yellow : const Color.fromARGB(166, 0, 0, 0),
-        radius: 25,
+      child: AnimatedContainer(
+        curve: Curves.fastEaseInToSlowEaseOut,
+        duration: const Duration(milliseconds: 500),
+        width: isHover ? 60 : 50,
+        height: isHover ? 60 : 50,
+        decoration: BoxDecoration(
+          color: isHover ? Colors.yellow : const Color.fromARGB(166, 0, 0, 0),
+          shape: BoxShape.circle,
+        ),
         child: Icon(
           widget.icon,
           color: isHover ? Colors.black : Colors.yellow,

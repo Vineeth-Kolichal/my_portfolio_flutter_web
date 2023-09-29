@@ -29,6 +29,7 @@ class MyPortfolio extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+            useMaterial3: true,
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.montserrat().fontFamily),
         initialRoute: "/",

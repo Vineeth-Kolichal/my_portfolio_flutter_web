@@ -11,7 +11,16 @@ class PortfolioSection extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       //  height: size.height,
-      color: Color.fromARGB(255, 20, 20, 20),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color.fromARGB(255, 15, 15, 15),
+            Color.fromARGB(255, 0, 0, 0)
+          ],
+        ),
+      ),
       child: LayoutBuilder(
         builder: (context, constraints) {
           return FractionallySizedBox(
@@ -26,7 +35,8 @@ class PortfolioSection extends StatelessWidget {
                     const SectionTitle(title: 'Projects'),
                     Space.y(20),
                     GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
+                      childAspectRatio: 0.8,
                       shrinkWrap: true,
                       crossAxisCount: Responsive.isDestop(context)
                           ? 4
@@ -37,20 +47,7 @@ class PortfolioSection extends StatelessWidget {
                       mainAxisSpacing: 10.0,
                       children: List.generate(6, (index) {
                         return Center(
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(children: [
-                                Text('Name'),
-                                // Image.network(
-                                //     'https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3=w240-h480-rw')
-                              ]),
-                            ),
-                          ),
+                          child: ProjectContainer(),
                         );
                       }),
                     ),
@@ -59,6 +56,52 @@ class PortfolioSection extends StatelessWidget {
                 ),
               ));
         },
+      ),
+    );
+  }
+}
+
+class ProjectContainer extends StatefulWidget {
+  const ProjectContainer({
+    super.key,
+  });
+
+  @override
+  State<ProjectContainer> createState() => _ProjectContainerState();
+}
+
+class _ProjectContainerState extends State<ProjectContainer> {
+  bool isHover = false;
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onHover: (value) {
+        setState(() {
+          isHover = value;
+        });
+      },
+      onTap: () {},
+      child: Material(
+        borderRadius: BorderRadius.circular(30),
+        shadowColor: Colors.grey,
+        elevation: isHover ? 10 : 0.0,
+        child: AnimatedContainer(
+          curve: Curves.fastEaseInToSlowEaseOut,
+          duration: const Duration(milliseconds: 500),
+          width: isHover ? 375 : 330,
+          height: isHover ? 425 : 380,
+          decoration: BoxDecoration(
+              color: !isHover ? Color.fromARGB(255, 24, 24, 24) : Colors.black,
+              borderRadius: BorderRadius.circular(30)),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(children: [
+              Text('Name'),
+              // Image.network(
+              //     'https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3=w240-h480-rw')
+            ]),
+          ),
+        ),
       ),
     );
   }
