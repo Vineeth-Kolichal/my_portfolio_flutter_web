@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const yellowDvider = SizedBox(
+const yellowDivider = SizedBox(
   width: 50,
   child: Divider(
     thickness: 2,
@@ -9,3 +9,11 @@ const yellowDvider = SizedBox(
   ),
 );
 
+const whiteDivider = SizedBox(
+  width: 50,
+  child: Divider(
+    thickness: 2,
+    height: 2,
+    color: Colors.white,
+  ),
+);

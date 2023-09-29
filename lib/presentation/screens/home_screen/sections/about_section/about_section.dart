@@ -92,7 +92,7 @@ class ExpertiseSectionWidget extends StatelessWidget {
                 fontSize: 25,
               ),
             ),
-            yellowDvider,
+            yellowDivider,
             Space.y(20),
             const ExpertiseItems(
               icon: Icons.android_rounded,
@@ -197,7 +197,7 @@ class ColumnOne extends StatelessWidget {
                       fontSize: 25,
                     ),
                   ),
-                  yellowDvider,
+                  yellowDivider,
                   Space.y(10),
                   const Text(
                     "I am a self-directed Flutter Developer with one year of hands-on experience. I have a bachelor's degree in computer science from the Kannur University, Kerala. I am proficient in Flutter, Dart, and Android development. I am also familiar with other programming languages such as Java, C, and C++.,",
@@ -218,7 +218,7 @@ class ColumnOne extends StatelessWidget {
                     fontSize: 25,
                   ),
                 ),
-                yellowDvider,
+                yellowDivider,
                 Space.y(10),
                 const Text('Expert-in',
                     style: TextStyle(fontSize: 20, color: Colors.yellow)),

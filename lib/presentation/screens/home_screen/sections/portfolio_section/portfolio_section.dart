@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:my_portfolio_site/presentation/screens/home_screen/sections/home_section/home_section.dart';
 import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
 import 'package:my_portfolio_site/presentation/widgets/section_title.dart';
 import 'package:my_portfolio_site/presentation/widgets/space.dart';
+import 'package:my_portfolio_site/util/constants.dart';
+import 'package:my_portfolio_site/util/icons.dart';
 
 class PortfolioSection extends StatelessWidget {
   const PortfolioSection({super.key});
@@ -101,16 +105,53 @@ class _ProjectContainerState extends State<ProjectContainer> {
                       Color.fromARGB(255, 15, 15, 15),
                     ],
                   ),
-            color: isHover ? null : Colors.black,
+            color: !isHover ? null : Colors.black,
             borderRadius: BorderRadius.circular(30),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(children: [
-              Text('Name'),
-              // Image.network(
-              //     'https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3=w240-h480-rw')
-            ]),
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'Project Name',
+                    style: TextStyle(fontSize: 20, color: Colors.yellow),
+                  ),
+                  whiteDivider,
+                  Space.y(20),
+                  Container(
+                    width: 260,
+                    height: 140,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png?20220228223904',
+                            ),
+                            fit: BoxFit.cover),
+                        color: const Color.fromARGB(255, 54, 54, 54),
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                  Space.y(10),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: 280),
+                    child: Text(
+                      maxLines: 5,
+                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                  Visibility(
+                    visible: isHover,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleButton(onTap: () {}, icon: CustomIcons.github)
+                      ],
+                    ),
+                  )
+                ]),
           ),
         ),
       ),
