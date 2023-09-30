@@ -1,10 +1,13 @@
+import 'dart:developer';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:my_portfolio_site/presentation/screens/home_screen/sections/home_section/home_section.dart';
-import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
-import 'package:my_portfolio_site/presentation/widgets/section_title.dart';
-import 'package:my_portfolio_site/presentation/widgets/space.dart';
+import 'package:my_portfolio_site/presentation/widgets/export_widgets.dart';
+
 import 'package:my_portfolio_site/util/constants.dart';
 import 'package:my_portfolio_site/util/icons.dart';
+import 'dart:html' as html;
 
 class PortfolioSection extends StatelessWidget {
   const PortfolioSection({super.key});
@@ -37,23 +40,39 @@ class PortfolioSection extends StatelessWidget {
                     Space.y(70),
                     const SectionTitle(title: 'Projects'),
                     Space.y(20),
-                    GridView.count(
-                      physics: const NeverScrollableScrollPhysics(),
-                      childAspectRatio: 0.8,
-                      shrinkWrap: true,
-                      crossAxisCount: Responsive.isDestop(context)
-                          ? 4
-                          : Responsive.isTabltet(context)
-                              ? 2
-                              : 1,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 20.0,
-                      children: List.generate(6, (index) {
-                        return const Center(
-                          child: ProjectContainer(),
-                        );
-                      }),
-                    ),
+                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        stream: FirebaseFirestore.instance
+                            .collection('projects')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            return GridView.count(
+                              physics: const NeverScrollableScrollPhysics(),
+                              childAspectRatio: 0.8,
+                              shrinkWrap: true,
+                              crossAxisCount: Responsive.isDestop(context)
+                                  ? 4
+                                  : Responsive.isTabltet(context)
+                                      ? 2
+                                      : 1,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 20.0,
+                              children: List.generate(
+                                  snapshot.data!.docs.length, (index) {
+                                return Center(
+                                  child: ProjectContainer(
+                                      queryDocumentSnapshot:
+                                          snapshot.data!.docs[index]),
+                                );
+                              }),
+                            );
+                          } else {
+                            return SizedBox(
+                              height: size.height,
+                              child: const CircularProgressIndicator(),
+                            );
+                          }
+                        }),
                     Space.y(70),
                   ],
                 ),
@@ -67,8 +86,9 @@ class PortfolioSection extends StatelessWidget {
 class ProjectContainer extends StatefulWidget {
   const ProjectContainer({
     super.key,
+    required this.queryDocumentSnapshot,
   });
-
+  final QueryDocumentSnapshot<Map<String, dynamic>> queryDocumentSnapshot;
   @override
   State<ProjectContainer> createState() => _ProjectContainerState();
 }
@@ -113,9 +133,9 @@ class _ProjectContainerState extends State<ProjectContainer> {
                 //  mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
-                    'Project Name',
-                    style: TextStyle(fontSize: 20, color: Colors.yellow),
+                  Text(
+                    '${widget.queryDocumentSnapshot.data()['projectName']}',
+                    style: const TextStyle(fontSize: 20, color: Colors.yellow),
                   ),
                   whiteDivider,
                   Space.y(20),
@@ -123,23 +143,36 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     width: 260,
                     height: 140,
                     decoration: BoxDecoration(
-                        image: const DecorationImage(
-                            image: NetworkImage(
-                              'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png?20220228223904',
-                            ),
-                            fit: BoxFit.cover),
-                        color: const Color.fromARGB(255, 54, 54, 54),
-                        borderRadius: BorderRadius.circular(20)),
+                      color: const Color.fromARGB(255, 54, 54, 54),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl:
+                            '${widget.queryDocumentSnapshot.data()['image']}',
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Center(
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, value: downloadProgress.progress),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 40,
+                        ),
+                      ),
+                    ),
                   ),
                   Space.y(10),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 280),
-                    child: const Text(
+                    child: Text(
                       maxLines: 5,
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                      "${widget.queryDocumentSnapshot.data()['description']}",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12),
+                      style: const TextStyle(fontSize: 12),
                     ),
                   ),
                   Visibility(
@@ -147,10 +180,26 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        CircleButton(onTap: () {}, icon: CustomIcons.github),
-                        Space.x(20),
                         CircleButton(
-                            onTap: () {}, icon: CustomIcons.google_play),
+                            onTap: () {
+                              html.window.open(
+                                  '${widget.queryDocumentSnapshot.data()['gitHubLink']}',
+                                  "_blank");
+                            },
+                            icon: CustomIcons.github),
+                        Space.x(20),
+                        Visibility(
+                          visible: (widget.queryDocumentSnapshot
+                                  .data()['downloadLink']) !=
+                              null,
+                          child: CircleButton(
+                              onTap: () {
+                                html.window.open(
+                                    '${widget.queryDocumentSnapshot.data()['downloadLink']}',
+                                    "_blank");
+                              },
+                              icon: Icons.download_outlined),
+                        ),
                       ],
                     ),
                   )

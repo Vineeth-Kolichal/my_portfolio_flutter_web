@@ -41,6 +41,9 @@ dependencies:
   iconsax: ^0.0.8
   firebase_core: ^2.15.1
   google_fonts: ^6.0.0
+  cloud_firestore: ^4.9.2
+  cloud_firestore_web: ^3.7.1
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:

@@ -8,10 +8,19 @@ class ContactSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-   // context.read<NavBarCubit>().selectSection(3);
+    // context.read<NavBarCubit>().selectSection(3);
     return Container(
       height: size.height,
-      color: const Color.fromARGB(255, 37, 37, 37),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color.fromARGB(255, 0, 0, 0),
+            Color.fromARGB(255, 15, 15, 15),
+          ],
+        ),
+      ),
       child: LayoutBuilder(builder: (context, constrains) {
         return FractionallySizedBox(
           widthFactor: constrains.maxWidth >= 1024 ? 0.8 : 1,
