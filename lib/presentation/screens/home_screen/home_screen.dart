@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_portfolio_site/business_logic/cubit/pointer_move_cubit.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 import 'package:my_portfolio_site/business_logic/nav_bar_cubit/nav_bar_cubit.dart';
 import 'package:my_portfolio_site/presentation/screens/home_screen/sections/about_section/about_section.dart';
 import 'package:my_portfolio_site/presentation/screens/home_screen/sections/contact_section/contact_section.dart';
@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<ProjectSectionCubit>().getProjects();
     Size size = MediaQuery.of(context).size;
     Timer(const Duration(milliseconds: 1500), () {
       positionNotifier.value = -(size.height / 2);

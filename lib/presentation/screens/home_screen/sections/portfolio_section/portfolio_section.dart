@@ -3,6 +3,9 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
+import 'package:my_portfolio_site/data/models/project_model.dart';
 import 'package:my_portfolio_site/presentation/widgets/export_widgets.dart';
 
 import 'package:my_portfolio_site/util/constants.dart';
@@ -40,39 +43,30 @@ class PortfolioSection extends StatelessWidget {
                     Space.y(70),
                     const SectionTitle(title: 'Projects'),
                     Space.y(20),
-                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                        stream: FirebaseFirestore.instance
-                            .collection('projects')
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null) {
-                            return GridView.count(
-                              physics: const NeverScrollableScrollPhysics(),
-                              childAspectRatio: 0.8,
-                              shrinkWrap: true,
-                              crossAxisCount: Responsive.isDestop(context)
-                                  ? 4
-                                  : Responsive.isTabltet(context)
-                                      ? 2
-                                      : 1,
-                              crossAxisSpacing: 10.0,
-                              mainAxisSpacing: 20.0,
-                              children: List.generate(
-                                  snapshot.data!.docs.length, (index) {
-                                return Center(
-                                  child: ProjectContainer(
-                                      queryDocumentSnapshot:
-                                          snapshot.data!.docs[index]),
-                                );
-                              }),
+                    BlocBuilder<ProjectSectionCubit, ProjectSectionState>(
+                      builder: (context, state) {
+                        return GridView.count(
+                          physics: const NeverScrollableScrollPhysics(),
+                          childAspectRatio: 0.8,
+                          shrinkWrap: true,
+                          crossAxisCount: Responsive.isDestop(context)
+                              ? 4
+                              : Responsive.isTabltet(context)
+                                  ? 2
+                                  : 1,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 20.0,
+                          children:
+                              List.generate(state.projectList.length, (index) {
+                            return Center(
+                              child: ProjectContainer(
+                                projectModel: state.projectList[index],
+                              ),
                             );
-                          } else {
-                            return SizedBox(
-                              height: size.height,
-                              child: const CircularProgressIndicator(),
-                            );
-                          }
-                        }),
+                          }),
+                        );
+                      },
+                    ),
                     Space.y(70),
                   ],
                 ),
@@ -86,9 +80,9 @@ class PortfolioSection extends StatelessWidget {
 class ProjectContainer extends StatefulWidget {
   const ProjectContainer({
     super.key,
-    required this.queryDocumentSnapshot,
+    required this.projectModel,
   });
-  final QueryDocumentSnapshot<Map<String, dynamic>> queryDocumentSnapshot;
+  final ProjectModel projectModel;
   @override
   State<ProjectContainer> createState() => _ProjectContainerState();
 }
@@ -134,7 +128,8 @@ class _ProjectContainerState extends State<ProjectContainer> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
-                    '${widget.queryDocumentSnapshot.data()['projectName']}',
+                    widget.projectModel.projectName,
+                    textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 20, color: Colors.yellow),
                   ),
                   whiteDivider,
@@ -150,8 +145,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                       borderRadius: BorderRadius.circular(20),
                       child: CachedNetworkImage(
                         fit: BoxFit.cover,
-                        imageUrl:
-                            '${widget.queryDocumentSnapshot.data()['image']}',
+                        imageUrl: widget.projectModel.image,
                         progressIndicatorBuilder:
                             (context, url, downloadProgress) => Center(
                           child: CircularProgressIndicator(
@@ -169,7 +163,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     constraints: const BoxConstraints(maxWidth: 280),
                     child: Text(
                       maxLines: 5,
-                      "${widget.queryDocumentSnapshot.data()['description']}",
+                      "${widget.projectModel.description}",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 12),
@@ -183,19 +177,19 @@ class _ProjectContainerState extends State<ProjectContainer> {
                         CircleButton(
                             onTap: () {
                               html.window.open(
-                                  '${widget.queryDocumentSnapshot.data()['gitHubLink']}',
+                                  '${widget.projectModel.gitHubLink}',
                                   "_blank");
                             },
                             icon: CustomIcons.github),
-                        Space.x(20),
                         Visibility(
-                          visible: (widget.queryDocumentSnapshot
-                                  .data()['downloadLink']) !=
-                              null,
+                            visible: (widget.projectModel.downloadLink) != null,
+                            child: Space.x(20)),
+                        Visibility(
+                          visible: (widget.projectModel.downloadLink) != null,
                           child: CircleButton(
                               onTap: () {
                                 html.window.open(
-                                    '${widget.queryDocumentSnapshot.data()['downloadLink']}',
+                                    '${widget.projectModel.downloadLink}',
                                     "_blank");
                               },
                               icon: Icons.download_outlined),

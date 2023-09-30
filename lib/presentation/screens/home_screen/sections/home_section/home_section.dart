@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:my_portfolio_site/business_logic/cubit/pointer_move_cubit.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 
 import 'package:my_portfolio_site/util/icons.dart';
 
@@ -90,75 +89,78 @@ class NameInHomeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: Responsive.isDestop(context)
-              ? size.width * 0.2
-              : size.width * 0.25,
-        ),
-        const Text(
-          "Hi, I'm",
-          style: TextStyle(fontSize: 35),
-        ),
-        Text(
-          'Vineeth Chandran',
-          style: TextStyle(
-              fontSize: Responsive.isDestop(context) ? 80 : 35,
-              fontWeight: FontWeight.w600),
-        ),
-        SizedBox(
-          width: Responsive.isDestop(context)
-              ? size.width * 0.3
-              : size.width * 0.7,
-          child: const Divider(
-            color: Colors.yellow,
-            thickness: 7,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: Responsive.isDestop(context)
+                ? size.width * 0.2
+                : size.width * 0.25,
           ),
-        ),
-        Container(
-            color: !Responsive.isDestop(context)
-                ? const Color.fromARGB(94, 70, 69, 69)
-                : null,
+          const Text(
+            "Hi, I'm",
+            style: TextStyle(fontSize: 35),
+          ),
+          Text(
+            'Vineeth Chandran',
+            style: TextStyle(
+                fontSize: Responsive.isDestop(context) ? 80 : 35,
+                fontWeight: FontWeight.w600),
+          ),
+          SizedBox(
             width: Responsive.isDestop(context)
                 ? size.width * 0.3
                 : size.width * 0.7,
-            child: Text(
-              'Flutter Developer',
-              style: TextStyle(
-                  fontSize: Responsive.isDestop(context) ? 30 : 20,
-                  letterSpacing: 15),
-            )),
-        Space.y(20),
-        SizedBox(
-          width: Responsive.isDestop(context)
-              ? size.width * 0.26
-              : size.width * 0.7,
-          child: Row(
-            children: [
-              CircleButton(
-                icon: CustomIcons.linkedin,
-                onTap: () {
-                  html.window.open(
-                      'https://www.linkedin.com/in/vineeth-chandran-kolichal/',
-                      "_blank");
-                },
-              ),
-              Space.x(10),
-              CircleButton(
-                onTap: () {
-                  html.window
-                      .open('https://github.com/Vineeth-Kolichal', "_blank");
-                },
-                icon: CustomIcons.github,
-              ),
-              Space.x(10),
-              const DownloadResumeButton()
-            ],
+            child: const Divider(
+              color: Colors.yellow,
+              thickness: 7,
+            ),
           ),
-        )
-      ],
+          Container(
+              color: !Responsive.isDestop(context)
+                  ? const Color.fromARGB(94, 70, 69, 69)
+                  : null,
+              width: Responsive.isDestop(context)
+                  ? size.width * 0.3
+                  : size.width * 0.7,
+              child: Text(
+                'Flutter Developer',
+                style: TextStyle(
+                    fontSize: Responsive.isDestop(context) ? 30 : 20,
+                    letterSpacing: 15),
+              )),
+          Space.y(20),
+          SizedBox(
+            width: Responsive.isDestop(context)
+                ? size.width * 0.26
+                : size.width * 0.7,
+            child: Row(
+              children: [
+                CircleButton(
+                  icon: CustomIcons.linkedin,
+                  onTap: () {
+                    html.window.open(
+                        'https://www.linkedin.com/in/vineeth-chandran-kolichal/',
+                        "_blank");
+                  },
+                ),
+                Space.x(10),
+                CircleButton(
+                  onTap: () {
+                    html.window
+                        .open('https://github.com/Vineeth-Kolichal', "_blank");
+                  },
+                  icon: CustomIcons.github,
+                ),
+                Space.x(10),
+                const DownloadResumeButton()
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

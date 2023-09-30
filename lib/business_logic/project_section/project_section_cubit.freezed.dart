@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'nav_bar_cubit.dart';
+part of 'project_section_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,27 +15,27 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$NavBarState {
-  int get index => throw _privateConstructorUsedError;
+mixin _$ProjectSectionState {
+  List<ProjectModel> get projectList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $NavBarStateCopyWith<NavBarState> get copyWith =>
+  $ProjectSectionStateCopyWith<ProjectSectionState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $NavBarStateCopyWith<$Res> {
-  factory $NavBarStateCopyWith(
-          NavBarState value, $Res Function(NavBarState) then) =
-      _$NavBarStateCopyWithImpl<$Res, NavBarState>;
+abstract class $ProjectSectionStateCopyWith<$Res> {
+  factory $ProjectSectionStateCopyWith(
+          ProjectSectionState value, $Res Function(ProjectSectionState) then) =
+      _$ProjectSectionStateCopyWithImpl<$Res, ProjectSectionState>;
   @useResult
-  $Res call({int index});
+  $Res call({List<ProjectModel> projectList});
 }
 
 /// @nodoc
-class _$NavBarStateCopyWithImpl<$Res, $Val extends NavBarState>
-    implements $NavBarStateCopyWith<$Res> {
-  _$NavBarStateCopyWithImpl(this._value, this._then);
+class _$ProjectSectionStateCopyWithImpl<$Res, $Val extends ProjectSectionState>
+    implements $ProjectSectionStateCopyWith<$Res> {
+  _$ProjectSectionStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -45,31 +45,31 @@ class _$NavBarStateCopyWithImpl<$Res, $Val extends NavBarState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = null,
+    Object? projectList = null,
   }) {
     return _then(_value.copyWith(
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
+      projectList: null == projectList
+          ? _value.projectList
+          : projectList // ignore: cast_nullable_to_non_nullable
+              as List<ProjectModel>,
     ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res>
-    implements $NavBarStateCopyWith<$Res> {
+    implements $ProjectSectionStateCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int index});
+  $Res call({List<ProjectModel> projectList});
 }
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$NavBarStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ProjectSectionStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -78,13 +78,13 @@ class __$$InitialImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? index = null,
+    Object? projectList = null,
   }) {
     return _then(_$InitialImpl(
-      index: null == index
-          ? _value.index
-          : index // ignore: cast_nullable_to_non_nullable
-              as int,
+      projectList: null == projectList
+          ? _value._projectList
+          : projectList // ignore: cast_nullable_to_non_nullable
+              as List<ProjectModel>,
     ));
   }
 }
@@ -92,14 +92,20 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({required this.index});
+  const _$InitialImpl({required final List<ProjectModel> projectList})
+      : _projectList = projectList;
 
+  final List<ProjectModel> _projectList;
   @override
-  final int index;
+  List<ProjectModel> get projectList {
+    if (_projectList is EqualUnmodifiableListView) return _projectList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_projectList);
+  }
 
   @override
   String toString() {
-    return 'NavBarState(index: $index)';
+    return 'ProjectSectionState(projectList: $projectList)';
   }
 
   @override
@@ -107,11 +113,13 @@ class _$InitialImpl implements _Initial {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
-            (identical(other.index, index) || other.index == index));
+            const DeepCollectionEquality()
+                .equals(other._projectList, _projectList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, index);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_projectList));
 
   @JsonKey(ignore: true)
   @override
@@ -120,11 +128,12 @@ class _$InitialImpl implements _Initial {
       __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
 }
 
-abstract class _Initial implements NavBarState {
-  const factory _Initial({required final int index}) = _$InitialImpl;
+abstract class _Initial implements ProjectSectionState {
+  const factory _Initial({required final List<ProjectModel> projectList}) =
+      _$InitialImpl;
 
   @override
-  int get index;
+  List<ProjectModel> get projectList;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

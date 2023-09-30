@@ -186,7 +186,7 @@ packages:
     source: hosted
     version: "5.16.1"
   cloud_firestore_web:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cloud_firestore_web
       sha256: f033aef13b13f94b0f361898df39307d8710859c8912626cfb08e439e350bd66

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_portfolio_site/business_logic/nav_bar_cubit/nav_bar_cubit.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 import 'package:my_portfolio_site/presentation/widgets/name_in_navbar.dart';
 import 'package:my_portfolio_site/presentation/widgets/nav_bar_widget.dart';
 import 'package:my_portfolio_site/presentation/widgets/space.dart';
-
-import '../../../../../business_logic/cubit/pointer_move_cubit.dart';
 
 class NavDesktop extends StatelessWidget {
   const NavDesktop({super.key});
@@ -16,29 +14,43 @@ class NavDesktop extends StatelessWidget {
       builder: (context, state) {
         return NavBarWidget(
           leading: Flexible(
-            flex: 3,
-            child: state.index != 0 ? const NameInNavBar() : const SizedBox.shrink(),
+            // flex: 3,
+            child: state.index != 0
+                ? const NameInNavBar()
+                : const SizedBox.shrink(),
           ),
           trailing: Expanded(
-              flex: 2,
+              // flex: 2,
               child: SizedBox(
-                height: 40,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return NavTextButton(
+            height: 40,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: List.generate(
+                  buttonLabels.length,
+                  (index) => NavTextButton(
                         label: buttonLabels[index],
                         selected: state.index == index,
                         onPressed: () {
                           context.read<NavBarCubit>().selectSection(index);
                         },
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return Space.x(40);
-                    },
-                    itemCount: buttonLabels.length),
-              )),
+                      )),
+            ),
+            // child: ListView.separated(
+            //     scrollDirection: Axis.horizontal,
+            //     itemBuilder: (context, index) {
+            //       return NavTextButton(
+            //         label: buttonLabels[index],
+            //         selected: state.index == index,
+            // onPressed: () {
+            //   context.read<NavBarCubit>().selectSection(index);
+            // },
+            //       );
+            //     },
+            //     separatorBuilder: (context, index) {
+            //       return Space.x(40);
+            //     },
+            //     itemCount: buttonLabels.length),
+          )),
         );
       },
     );
@@ -64,6 +76,7 @@ class _NavTextButtonState extends State<NavTextButton> {
   bool hover = false;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
       borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(30),
@@ -81,7 +94,11 @@ class _NavTextButtonState extends State<NavTextButton> {
       },
       onTap: widget.onPressed,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.only(
+            top: 10,
+            bottom: 10,
+            left: size.width * 0.02,
+            right: size.width * 0.02),
         child: Text(
           widget.label,
           style: TextStyle(
