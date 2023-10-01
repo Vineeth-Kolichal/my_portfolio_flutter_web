@@ -6,7 +6,7 @@ import 'package:my_portfolio_site/util/constants.dart';
 String skills =
     "Flutter, Dart, BloC, Provider, GetX, REST API Integration, Firebase, Hive, SQFLite, Git, GitHub, MVVM, MVC, BLoC Architecture";
 String familiar =
-    "Firebase FCM, Google map, HTML, CSS, JavaScript, Bootstrap, Java, C++,C Data Structure,Figma, DDD Architecture";
+    "Firebase FCM, Google map, HTML, CSS, JavaScript, Bootstrap, Java, Node js, Express js, MongoDB";
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -141,7 +141,7 @@ class ExpertiseItems extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: Colors.yellow,
+            color: Color(0xFFFFEB3B),
             size: 70,
           ),
           Space.x(10),

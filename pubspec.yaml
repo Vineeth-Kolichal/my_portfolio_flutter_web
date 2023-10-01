@@ -44,6 +44,7 @@ dependencies:
   cloud_firestore: ^4.9.2
   cached_network_image: ^3.3.0
   animated_text_kit: ^4.2.2
+  lottie: ^2.6.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
   assets:
     - assets/images/bg_image.jpg
     - assets/images/image.png
+    - assets/lottie/contact.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

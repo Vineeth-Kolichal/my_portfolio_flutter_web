@@ -28,7 +28,7 @@ class MyPortfolio extends StatelessWidget {
         BlocProvider(
           create: (context) => PointerMoveCubit(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => ProjectSectionCubit(),
         )
       ],
@@ -36,6 +36,7 @@ class MyPortfolio extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             useMaterial3: true,
+            primarySwatch: Colors.yellow,
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.montserrat().fontFamily),
         initialRoute: "/",

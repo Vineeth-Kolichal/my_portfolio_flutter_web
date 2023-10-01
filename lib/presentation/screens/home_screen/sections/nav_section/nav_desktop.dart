@@ -116,4 +116,4 @@ class _NavTextButtonState extends State<NavTextButton> {
   }
 }
 
-List<String> buttonLabels = ["Home", "About", "Portfolio", "Contact"];
+List<String> buttonLabels = ["Home", "About", "Portfolio", "Contact Me"];

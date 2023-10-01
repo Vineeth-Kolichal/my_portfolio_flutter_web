@@ -10,6 +10,7 @@ class NameInNavBar extends StatefulWidget {
 }
 
 class _NameInNavBarState extends State<NameInNavBar> {
+  
   double opacity = 0.0;
   void _setOpacity() {
     setState(() {

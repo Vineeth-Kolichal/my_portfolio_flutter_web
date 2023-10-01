@@ -114,7 +114,11 @@ class NameInHomeSection extends StatelessWidget {
           Text(
             'Vineeth Chandran',
             style: TextStyle(
-                fontSize: Responsive.isDestop(context) ? 80 : 35,
+                fontSize: Responsive.isDestop(context)
+                    ? 80
+                    : Responsive.isTabltet(context)
+                        ? 35
+                        : 30,
                 fontWeight: FontWeight.w600),
           ),
           SizedBox(
