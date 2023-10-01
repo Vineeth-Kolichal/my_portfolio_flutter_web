@@ -114,7 +114,7 @@ class ExpertiseSectionWidget extends StatelessWidget {
               icon: CupertinoIcons.globe,
               heading: 'Web development',
               content:
-                  'Familiar to build scalable and reliable web applications with Node.js, Express, and MongoDB, a powerful and flexible stack for backend development, is this sentence is correct',
+                  'Familiar to build scalable and reliable web applications with Node.js, Express, and MongoDB, a powerful and flexible stack for backend development.',
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -66,9 +67,16 @@ class HomeSection extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: NameInHomeSection(size: size),
+                Positioned(
+                  top: Responsive.isDestop(context)
+                      ? 250
+                      : Responsive.isTabltet(context)
+                          ? 200
+                          : 100,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: NameInHomeSection(size: size),
+                  ),
                 ),
               ],
             ),
@@ -94,11 +102,11 @@ class NameInHomeSection extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: Responsive.isDestop(context)
-                ? size.width * 0.2
-                : size.width * 0.25,
-          ),
+          // SizedBox(
+          //   height: Responsive.isDestop(context)
+          //       ? size.width * 0.2
+          //       : size.width * 0.25,
+          // ),
           const Text(
             "Hi, I'm",
             style: TextStyle(fontSize: 35),
@@ -119,18 +127,19 @@ class NameInHomeSection extends StatelessWidget {
             ),
           ),
           Container(
-              color: !Responsive.isDestop(context)
-                  ? const Color.fromARGB(94, 70, 69, 69)
-                  : null,
-              width: Responsive.isDestop(context)
-                  ? size.width * 0.3
-                  : size.width * 0.7,
-              child: Text(
-                'Flutter Developer',
-                style: TextStyle(
-                    fontSize: Responsive.isDestop(context) ? 30 : 20,
-                    letterSpacing: 15),
-              )),
+            color: !Responsive.isDestop(context)
+                ? const Color.fromARGB(94, 70, 69, 69)
+                : null,
+            width: Responsive.isDestop(context)
+                ? size.width * 0.3
+                : size.width * 0.7,
+            child: Text(
+              'Flutter Developer',
+              style: TextStyle(
+                  fontSize: Responsive.isDestop(context) ? 30 : 20,
+                  letterSpacing: 15),
+            ),
+          ),
           Space.y(20),
           SizedBox(
             width: Responsive.isDestop(context)
