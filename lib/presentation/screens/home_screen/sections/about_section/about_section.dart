@@ -114,7 +114,7 @@ class ExpertiseSectionWidget extends StatelessWidget {
               icon: CupertinoIcons.globe,
               heading: 'Web development',
               content:
-                  'Expert in developing beautiful and engaging websites using Flutter, HTML, CSS, and Bootstrap. Proven ability to create user-friendly and responsive websites that meet the needs of a variety of clients. ',
+                  'Familiar to build scalable and reliable web applications with Node.js, Express, and MongoDB, a powerful and flexible stack for backend development, is this sentence is correct',
             ),
           ],
         ),
@@ -154,7 +154,7 @@ class ExpertiseItems extends StatelessWidget {
                   heading,
                   style: const TextStyle(fontSize: 20, color: Colors.yellow),
                 ),
-                Text(
+                SelectableText(
                   content,
                   style: const TextStyle(fontSize: 16),
                 )
@@ -198,7 +198,7 @@ class ColumnOne extends StatelessWidget {
                   yellowDivider,
                   Space.y(10),
                   const Text(
-                    "I am a self-directed Flutter Developer with one year of hands-on experience. I have a bachelor's degree in computer science from the Kannur University, Kerala. I am proficient in Flutter, Dart, and Android development. I am also familiar with other programming languages such as Java, C, and C++.,",
+                    "I am a self-directed Flutter Developer with one year of hands-on experience. I have a bachelor's degree in computer science from the Kannur University, Kerala. I am proficient in mobile app development using Flutter. I am also familiar with web designing and backend development using Node.js, Express",
                     style: TextStyle(fontSize: 16, height: 1.5),
                   ),
                 ],

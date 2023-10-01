@@ -8,8 +8,24 @@ class FooterSection extends StatelessWidget {
     return Container(
       color: Colors.black,
       height: 50,
-      child: const Center(
-        child: Text('Creatd by Vineeth'),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Made with '),
+            Icon(
+              Icons.favorite,
+              color: Colors.yellow,
+              size: 17,
+            ),
+            Text(' by Vineeth '),
+            Icon(
+              Icons.copyright,
+              size: 16,
+            ),
+            Text(' ${DateTime.now().year}')
+          ],
+        ),
       ),
     );
   }
