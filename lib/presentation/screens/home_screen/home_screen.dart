@@ -149,15 +149,22 @@ class BlackHalfSection extends StatelessWidget {
           valueListenable: positionNotifier,
           builder: (context, value, _) {
             return AnimatedContainer(
-              curve: Curves.fastEaseInToSlowEaseOut,
-              duration: const Duration(milliseconds: 1000),
-              transform:
-                  Transform.translate(offset: Offset(0, value * position))
-                      .transform,
-              height: (size.height / 2),
-              width: size.width,
-              color: Colors.black,
-            );
+                curve: Curves.fastEaseInToSlowEaseOut,
+                duration: const Duration(milliseconds: 1000),
+                transform:
+                    Transform.translate(offset: Offset(0, value * position))
+                        .transform,
+                height: (size.height / 2),
+                width: size.width,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  border: Border(
+                      bottom: BorderSide(
+                          color: Colors.yellow, width: position == 1 ? 0.5 : 0),
+                      top: BorderSide(
+                          color: Colors.yellow,
+                          width: position != 1 ? 0.5 : 0)),
+                ));
           }),
     );
   }
