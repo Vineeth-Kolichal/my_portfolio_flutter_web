@@ -43,10 +43,10 @@ class HomeSection extends StatelessWidget {
                   child: Image.asset(
                     'assets/images/image.png',
                     scale: Responsive.isDestop(context)
-                        ? 3
+                        ? (size.width / size.height) * 2
                         : Responsive.isTabltet(context)
                             ? 3.5
-                            : 5.5,
+                            : (size.height / size.width) * 3.2,
                   ),
                 ),
                 Container(

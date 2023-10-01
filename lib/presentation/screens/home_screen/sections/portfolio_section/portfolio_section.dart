@@ -124,7 +124,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-                //  mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
