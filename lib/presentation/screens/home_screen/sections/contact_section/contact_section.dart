@@ -83,18 +83,19 @@ class ContactDetailsAndLottie extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-             const Text(
-                  'Get in touch',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 25,
-                  ),
-                ),
-                yellowDivider,
             ElevatedBoxWidget(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const Text(
+                    'Get in touch',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 25,
+                    ),
+                  ),
+                  yellowDivider,
                   ContactTypeTile(
                     content:
                         'Erinhilamkode (H),\nKolichal (PO),\nRajapuram (via), \nKasaragod (DT),\nKerala, 671532 ',
