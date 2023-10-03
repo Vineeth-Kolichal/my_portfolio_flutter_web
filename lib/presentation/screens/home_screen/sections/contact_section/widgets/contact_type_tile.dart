@@ -8,9 +8,12 @@ class ContactTypeTile extends StatelessWidget {
     super.key,
     required this.content,
     required this.icon,
+    this.onTap
   });
   final String content;
   final IconData icon;
+  final Function()? onTap;
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,6 +29,7 @@ class ContactTypeTile extends StatelessWidget {
           const SizedBox(height: 70, child: VerticalDivider()),
           Expanded(
             child: SelectableText(
+              onTap: onTap,
               content,
               style: const TextStyle(fontSize: 16),
             ),

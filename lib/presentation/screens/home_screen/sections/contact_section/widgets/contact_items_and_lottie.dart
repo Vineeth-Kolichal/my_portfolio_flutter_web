@@ -1,7 +1,8 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 
 import '../../../../../../util/constants.dart';
 import '../../../../../../util/icons.dart';
@@ -24,33 +25,47 @@ class ContactDetailsAndLottie extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-             const ElevatedBoxWidget(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Get in touch',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25,
+            InkWell(
+              onTap: () {},
+              onHover: (value) {
+                if (value) {
+                  context.read<PointerMoveCubit>().setWidthZero(0);
+                } else {
+                  context.read<PointerMoveCubit>().setWidthZero(30);
+                }
+              },
+              child: ElevatedBoxWidget(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Get in touch',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 25,
+                      ),
                     ),
-                  ),
-                  yellowDivider,
-                  ContactTypeTile(
-                    content:
-                        'Erinhilamkode (H),\nKolichal (PO),\nRajapuram (via), \nKasaragod (DT),\nKerala, 671532 ',
-                    icon: Icons.location_on_outlined,
-                  ),
-                  ContactTypeTile(
-                    content: 'vineethchandran5898@gmail.com',
-                    icon: CupertinoIcons.mail,
-                  ),
-                  ContactTypeTile(
-                    content: '+91 9074492664\n+91 8281234435',
-                    icon: Icons.phone,
-                  ),
-                ],
+                    yellowDivider,
+                    const ContactTypeTile(
+                      content:
+                          'Erinhilamkode (H),\nKolichal (PO),\nRajapuram (via), \nKasaragod (DT),\nKerala, 671532 ',
+                      icon: Icons.location_on_outlined,
+                    ),
+                    ContactTypeTile(
+                      onTap: () async {
+                        html.window.open(
+                            'mailto:vineethchandran5898@gmail.com', "_blank");
+                      },
+                      content: 'vineethchandran5898@gmail.com',
+                      icon: CupertinoIcons.mail,
+                    ),
+                    const ContactTypeTile(
+                      content: '+91 9074492664\n+91 8281234435',
+                      icon: Icons.phone,
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(
