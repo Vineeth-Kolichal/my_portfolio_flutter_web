@@ -139,24 +139,23 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child:
-                          // Image.asset(
-                          //   widget.projectModel.image,
-                          //   fit: BoxFit.cover,
-                          // ),
-                          CachedNetworkImage(
+                      child: Image.asset(
+                        widget.projectModel.image,
                         fit: BoxFit.cover,
-                        imageUrl: widget.projectModel.image,
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) => Center(
-                          child: CircularProgressIndicator(
-                              strokeWidth: 2, value: downloadProgress.progress),
-                        ),
-                        errorWidget: (context, url, error) => const Icon(
-                          Icons.image_not_supported_outlined,
-                          size: 40,
-                        ),
                       ),
+                      //     CachedNetworkImage(
+                      //   fit: BoxFit.cover,
+                      //   imageUrl: widget.projectModel.image,
+                      //   progressIndicatorBuilder:
+                      //       (context, url, downloadProgress) => Center(
+                      //     child: CircularProgressIndicator(
+                      //         strokeWidth: 2, value: downloadProgress.progress),
+                      //   ),
+                      //   errorWidget: (context, url, error) => const Icon(
+                      //     Icons.image_not_supported_outlined,
+                      //     size: 40,
+                      //   ),
+                      // ),
                     ),
                   ),
                   Space.y(10),

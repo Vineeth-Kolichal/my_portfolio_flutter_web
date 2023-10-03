@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,20 +13,27 @@ class ProjectDataProviders {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('projects');
     final docs = await collectionReference.get();
-    for (var i = 0; i < docs.docs.length; i++) {
+    for (var i = docs.docs.length - 1; i >= 0; i--) {
       Map<String, dynamic> dataMap =
           docs.docs[i].data() as Map<String, dynamic>;
       projects.add(ProjectModel.fromMap(dataMap));
     }
 
     // try {
-    //   for (var i = 0; i < projectsMapList.length; i++) {
-    //     Map<String, dynamic> dataMap = projectsMapList[i];
-    //     projects.add(ProjectModel.fromMap(dataMap));
+    //   for (var i = projectsMapList.length - 1; i >= 0; i--) {
+    //     await Future.delayed(Duration(milliseconds: 3000), () {
+    //       collectionReference
+    //           .doc(DateTime.now().millisecondsSinceEpoch.toString())
+    //           .set(projectsMapList[i]);
+    //     });
+
+    //     // Map<String, dynamic> dataMap = projectsMapList[i];
+    //     // projects.add(ProjectModel.fromMap(dataMap));
     //   }
     // } catch (e) {
     //   log(e.toString());
     // }
+
     return projects;
   }
 
