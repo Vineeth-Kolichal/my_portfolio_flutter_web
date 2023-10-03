@@ -12,14 +12,14 @@ class FooterSection extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Made with '),
-            Icon(
+            const Text('Made with '),
+            const Icon(
               Icons.favorite,
               color: Colors.yellow,
               size: 17,
             ),
-            Text(' by Vineeth '),
-            Icon(
+            const Text(' by Vineeth '),
+            const Icon(
               Icons.copyright,
               size: 16,
             ),

@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_portfolio_site/data/models/project_model.dart';
 
 class ProjectDataProviders {
@@ -71,7 +70,7 @@ List<Map<String, dynamic>> projectsMapList = [
   {
     "projectName": "To-Do API",
     "description":
-        "Todo API is developed with Node.js and Express frameword, mongoDB is used for storing data. JWT is used for autherize users",
+        "Todo API is developed with Node.js and Express framework, mongoDB is used for storing data. JWT is used for autherize users",
     "image": "assets/images/todo_api.png",
     "gitHubLink": "https://github.com/Vineeth-Kolichal/todo-api",
     "downloadLink": null
@@ -84,14 +83,15 @@ List<Map<String, dynamic>> projectsMapList = [
     "gitHubLink": "https://github.com/Vineeth-Kolichal/trading-edge",
     "downloadLink": null
   },
-  // {
-  //   "projectName": "Image downloader",
-  //   "description":
-  //       "This application allows users to download images from URLs and save them to the Downloads folder on the device's storage. Bloc state management is used",
-  //   "gitHubLink":
-  //       "https://github.com/Vineeth-Kolichal/Image-Download-from-URL-app",
-  //   "downloadLink": null
-  // },
+  {
+    "projectName": "Image downloader",
+    "description":
+        "This application allows users to download images from URLs and save them to the Downloads folder on the device's storage. Bloc state management is used",
+    "image": "assets/images/image_downloader.png",
+    "gitHubLink":
+        "https://github.com/Vineeth-Kolichal/Image-Download-from-URL-app",
+    "downloadLink": null
+  },
   {
     "projectName": "Income and Expence Tracker",
     "description":

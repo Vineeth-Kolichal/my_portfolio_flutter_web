@@ -1,7 +1,4 @@
-import 'dart:developer';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_portfolio_site/business_logic/export_cubit.dart';
@@ -167,7 +164,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     constraints: const BoxConstraints(maxWidth: 280),
                     child: Text(
                       maxLines: 5,
-                      "${widget.projectModel.description}",
+                      widget.projectModel.description,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 12),
@@ -181,7 +178,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                         CircleButton(
                             onTap: () {
                               html.window.open(
-                                  '${widget.projectModel.gitHubLink}',
+                                  widget.projectModel.gitHubLink,
                                   "_blank");
                             },
                             icon: CustomIcons.github),

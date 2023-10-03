@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 import 'package:my_portfolio_site/presentation/widgets/name_in_navbar.dart';
 import 'package:my_portfolio_site/presentation/widgets/nav_bar_widget.dart';
-import 'package:my_portfolio_site/presentation/widgets/space.dart';
 
 class NavDesktop extends StatelessWidget {
   const NavDesktop({super.key});
@@ -35,21 +34,6 @@ class NavDesktop extends StatelessWidget {
                         },
                       )),
             ),
-            // child: ListView.separated(
-            //     scrollDirection: Axis.horizontal,
-            //     itemBuilder: (context, index) {
-            //       return NavTextButton(
-            //         label: buttonLabels[index],
-            //         selected: state.index == index,
-            // onPressed: () {
-            //   context.read<NavBarCubit>().selectSection(index);
-            // },
-            //       );
-            //     },
-            //     separatorBuilder: (context, index) {
-            //       return Space.x(40);
-            //     },
-            //     itemCount: buttonLabels.length),
           )),
         );
       },
@@ -102,7 +86,7 @@ class _NavTextButtonState extends State<NavTextButton> {
         child: Text(
           widget.label,
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w700,
             color: hover
                 ? Colors.yellow

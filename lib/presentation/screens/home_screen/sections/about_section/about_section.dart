@@ -141,7 +141,7 @@ class ExpertiseItems extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: Color(0xFFFFEB3B),
+            color: const Color(0xFFFFEB3B),
             size: 70,
           ),
           Space.x(10),

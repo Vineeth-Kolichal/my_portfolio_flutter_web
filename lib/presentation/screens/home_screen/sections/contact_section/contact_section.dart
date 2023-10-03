@@ -20,7 +20,7 @@ class ContactSection extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     // context.read<NavBarCubit>().selectSection(3);
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -53,10 +53,10 @@ class ContactSection extends StatelessWidget {
               mobile: Column(
                 children: [
                   ContactDetailsAndLottie(
-                    width: constrains.maxWidth * 0.9,
+                    width: constrains.maxWidth * 0.95,
                   ),
                   MessageForm(
-                    width: constrains.maxWidth * 0.9,
+                    width: constrains.maxWidth * 0.95,
                   )
                 ],
               ),
@@ -83,12 +83,12 @@ class ContactDetailsAndLottie extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ElevatedBoxWidget(
+            const ElevatedBoxWidget(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     'Get in touch',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -183,7 +183,7 @@ class ContactTypeTile extends StatelessWidget {
         children: [
           Icon(
             icon,
-            color: Color(0xFFFFEB3B),
+            color: const Color(0xFFFFEB3B),
             size: 50,
           ),
           Space.x(10),
@@ -269,18 +269,18 @@ class MessageForm extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('Close'))
+                                child: const Text('Close'))
                           ],
                         ),
                       );
                     },
-                    child: Text(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow),
+                    child: const Text(
                       'Send message',
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.w800),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow),
                   ),
                 )
               ],
@@ -321,8 +321,8 @@ class MessageMeTextField extends StatelessWidget {
           }
         },
         decoration: InputDecoration(
-          labelStyle: TextStyle(color: Colors.yellow),
-          constraints: BoxConstraints(minHeight: 40),
+          labelStyle: const TextStyle(color: Colors.yellow),
+          constraints: const BoxConstraints(minHeight: 40),
           labelText: labelText,
         ),
       ),
