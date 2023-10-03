@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 import 'package:my_portfolio_site/business_logic/pointer_move/pointer_move_cubit.dart';
+import 'package:my_portfolio_site/data/data_providers/send_message.dart';
 import 'package:my_portfolio_site/presentation/widgets/circle_button.dart';
 import 'package:my_portfolio_site/presentation/widgets/elevated_box_widget.dart';
 import 'package:my_portfolio_site/presentation/widgets/responsive.dart';
@@ -208,6 +210,7 @@ class MessageForm extends StatelessWidget {
   final double width;
   @override
   Widget build(BuildContext context) {
+    final sendmessage = context.read<SendMessageCubit>();
     return InkWell(
       onHover: (value) {
         if (value) {
@@ -222,68 +225,98 @@ class MessageForm extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ElevatedBoxWidget(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Message to me',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 25,
-                  ),
-                ),
-                yellowDivider,
-                MessageMeTextField(
-                  type: TextInputType.name,
-                  labelText: 'Your Name',
-                  controller: TextEditingController(),
-                ),
-                MessageMeTextField(
-                    type: TextInputType.emailAddress,
-                    labelText: 'e-mail',
-                    controller: TextEditingController()),
-                MessageMeTextField(
-                  type: TextInputType.number,
-                  labelText: 'Phone number',
-                  controller: TextEditingController(),
-                ),
-                MessageMeTextField(
-                  type: TextInputType.multiline,
-                  labelText: 'Your Message',
-                  controller: TextEditingController(),
-                  maxLines: 5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      showAdaptiveDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Oh ohhh!!!"),
-                          content: const Text(
-                              'Send message facility is not available now'),
-                          actions: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('Close'))
-                          ],
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow),
-                    child: const Text(
-                      'Send message',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w800),
+            child: Form(
+              key: sendmessage.formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Message to me',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 25,
                     ),
                   ),
-                )
-              ],
+                  yellowDivider,
+                  MessageMeTextField(
+                    type: TextInputType.name,
+                    labelText: 'Your Name',
+                    controller: sendmessage.nameController,
+                  ),
+                  MessageMeTextField(
+                    type: TextInputType.emailAddress,
+                    labelText: 'e-mail',
+                    controller: sendmessage.emailController,
+                  ),
+                  MessageMeTextField(
+                    type: TextInputType.number,
+                    labelText: 'Phone number',
+                    controller: sendmessage.phoneController,
+                  ),
+                  MessageMeTextField(
+                    type: TextInputType.multiline,
+                    labelText: 'Your Message',
+                    controller: sendmessage.messageController,
+                    maxLines: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: SizedBox(
+                      height: 35,
+                      child: BlocBuilder<SendMessageCubit, SendMessageState>(
+                        builder: (context, state) {
+                          if (state.isSend == null && state.isSending == null) {
+                            return ElevatedButton(
+                              onPressed: () {
+                                if (sendmessage.formKey.currentState!
+                                    .validate()) {
+                                  sendmessage.sendMessage();
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.yellow),
+                              child: const Text(
+                                'Send message',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800),
+                              ),
+                            );
+                          } else if (state.isSending!) {
+                            return const Center(
+                              child: Text(
+                                "Sending...",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.yellow),
+                              ),
+                            );
+                          } else if (state.isSend!) {
+                            return const Center(
+                              child: Text(
+                                "Message send successfully",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.green),
+                              ),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text(
+                                "Message not send",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.red),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

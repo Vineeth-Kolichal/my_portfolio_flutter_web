@@ -30,7 +30,10 @@ class MyPortfolio extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ProjectSectionCubit(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => SendMessageCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

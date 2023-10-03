@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_portfolio_site/data/models/project_model.dart';
 
 class ProjectDataProviders {
@@ -8,23 +9,23 @@ class ProjectDataProviders {
   Future<List<ProjectModel>> getProjets() async {
     List<ProjectModel> projects = [];
 
-    // CollectionReference collectionReference =
-    //     FirebaseFirestore.instance.collection('projects');
-    // final docs = await collectionReference.get();
-    // for (var i = 0; i < docs.docs.length; i++) {
-    //   Map<String, dynamic> dataMap =
-    //       docs.docs[i].data() as Map<String, dynamic>;
-    //   projects.add(ProjectModel.fromMap(dataMap));
-    // }
-
-    try {
-      for (var i = 0; i < projectsMapList.length; i++) {
-        Map<String, dynamic> dataMap = projectsMapList[i];
-        projects.add(ProjectModel.fromMap(dataMap));
-      }
-    } catch (e) {
-      log(e.toString());
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection('projects');
+    final docs = await collectionReference.get();
+    for (var i = 0; i < docs.docs.length; i++) {
+      Map<String, dynamic> dataMap =
+          docs.docs[i].data() as Map<String, dynamic>;
+      projects.add(ProjectModel.fromMap(dataMap));
     }
+
+    // try {
+    //   for (var i = 0; i < projectsMapList.length; i++) {
+    //     Map<String, dynamic> dataMap = projectsMapList[i];
+    //     projects.add(ProjectModel.fromMap(dataMap));
+    //   }
+    // } catch (e) {
+    //   log(e.toString());
+    // }
     return projects;
   }
 

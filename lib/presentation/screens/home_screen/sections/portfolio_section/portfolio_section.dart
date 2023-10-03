@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 import 'package:my_portfolio_site/data/models/project_model.dart';
 import 'package:my_portfolio_site/presentation/widgets/export_widgets.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:my_portfolio_site/util/constants.dart';
 import 'package:my_portfolio_site/util/icons.dart';
 import 'dart:html' as html;
@@ -140,23 +139,24 @@ class _ProjectContainerState extends State<ProjectContainer> {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        widget.projectModel.image,
+                      child:
+                          // Image.asset(
+                          //   widget.projectModel.image,
+                          //   fit: BoxFit.cover,
+                          // ),
+                          CachedNetworkImage(
                         fit: BoxFit.cover,
+                        imageUrl: widget.projectModel.image,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Center(
+                          child: CircularProgressIndicator(
+                              strokeWidth: 2, value: downloadProgress.progress),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          size: 40,
+                        ),
                       ),
-                      //     CachedNetworkImage(
-                      //   fit: BoxFit.cover,
-                      //   imageUrl: widget.projectModel.image,
-                      //   progressIndicatorBuilder:
-                      //       (context, url, downloadProgress) => Center(
-                      //     child: CircularProgressIndicator(
-                      //         strokeWidth: 2, value: downloadProgress.progress),
-                      //   ),
-                      //   errorWidget: (context, url, error) => const Icon(
-                      //     Icons.image_not_supported_outlined,
-                      //     size: 40,
-                      //   ),
-                      // ),
                     ),
                   ),
                   Space.y(10),
@@ -178,8 +178,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                         CircleButton(
                             onTap: () {
                               html.window.open(
-                                  widget.projectModel.gitHubLink,
-                                  "_blank");
+                                  widget.projectModel.gitHubLink, "_blank");
                             },
                             icon: CustomIcons.github),
                         Visibility(
