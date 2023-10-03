@@ -70,7 +70,7 @@ List<Map<String, dynamic>> projectsMapList = [
   {
     "projectName": "To-Do API",
     "description":
-        "Todo API is developed with Node.js and Express framework, mongoDB is used for storing data. JWT is used for autherize users",
+        "Todo API is developed with Node.js, Express, and mongoDB is used for storing data. JWT is used for autherize users",
     "image": "assets/images/todo_api.png",
     "gitHubLink": "https://github.com/Vineeth-Kolichal/todo-api",
     "downloadLink": null
