@@ -11,8 +11,9 @@ class ProjectDataProviders {
 
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('projects');
-    final docs = await collectionReference.get();
-    for (var i = docs.docs.length - 1; i >= 0; i--) {
+    final docs =
+        await collectionReference.orderBy('date', descending: false).get();
+    for (var i = 0; i < docs.docs.length; i++) {
       Map<String, dynamic> dataMap =
           docs.docs[i].data() as Map<String, dynamic>;
       projects.add(ProjectModel.fromMap(dataMap));
