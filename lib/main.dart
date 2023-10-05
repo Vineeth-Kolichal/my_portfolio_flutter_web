@@ -33,6 +33,9 @@ class MyPortfolio extends StatelessWidget {
         BlocProvider(
           create: (context) => SendMessageCubit(),
         ),
+        BlocProvider(
+          create: (context) => ProfileCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -42,8 +45,7 @@ class MyPortfolio extends StatelessWidget {
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.montserrat().fontFamily),
         initialRoute: "/",
-        
-         home:const  HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 
 import '../../../../../../util/constants.dart';
 import '../../../../../widgets/export_widgets.dart';
@@ -12,67 +13,71 @@ class ColumnOne extends StatelessWidget {
   final BoxConstraints constraints;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Responsive.isDestop(context)
-          ? (constraints.maxWidth * 0.8) / 3.5
-          : constraints.maxWidth * 0.9,
-      child: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ElevatedBoxWidget(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Who am I ?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25,
-                    ),
-                  ),
-                  yellowDivider,
-                  Space.y(10),
-                  const Text(
-                    "I am a self-directed Flutter Developer with one year of hands-on experience. I have a bachelor's degree in computer science from the Kannur University, Kerala. I am proficient in mobile app development using Flutter. I am also familiar with web designing and backend development using Node.js, Express",
-                    style: TextStyle(fontSize: 16, height: 1.5),
-                  ),
-                ],
-              ),
-            ),
-            Space.y(30),
-            ElevatedBoxWidget(
-                child: Column(
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        return SizedBox(
+          width: Responsive.isDestop(context)
+              ? (constraints.maxWidth * 0.8) / 3.5
+              : constraints.maxWidth * 0.9,
+          child: Padding(
+            padding: const EdgeInsets.all(0.0),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Skills',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 25,
+                ElevatedBoxWidget(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Who am I ?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 25,
+                        ),
+                      ),
+                      yellowDivider,
+                      Space.y(10),
+                      Text(
+                        state.whoAmI,
+                        style: const TextStyle(fontSize: 16, height: 1.5),
+                      ),
+                    ],
                   ),
                 ),
-                yellowDivider,
-                Space.y(10),
-                const Text('Expert-in',
-                    style: TextStyle(fontSize: 20, color: Colors.yellow)),
-                Text(
-                  skills,
-                  style: const TextStyle(fontSize: 16, height: 1.7),
-                ),
-                Space.y(10),
-                const Text('Familiar-with',
-                    style: TextStyle(fontSize: 20, color: Colors.yellow)),
-                Text(
-                  familiar,
-                  style: const TextStyle(fontSize: 16, height: 1.7),
-                ),
+                Space.y(30),
+                ElevatedBoxWidget(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Skills',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 25,
+                      ),
+                    ),
+                    yellowDivider,
+                    Space.y(10),
+                    const Text('Expert-in',
+                        style: TextStyle(fontSize: 20, color: Colors.yellow)),
+                    Text(
+                      state.expertIn,
+                      style: const TextStyle(fontSize: 16, height: 1.7),
+                    ),
+                    Space.y(10),
+                    const Text('Familiar-with',
+                        style: TextStyle(fontSize: 20, color: Colors.yellow)),
+                    Text(
+                      state.familiarWith,
+                      style: const TextStyle(fontSize: 16, height: 1.7),
+                    ),
+                  ],
+                ))
               ],
-            ))
-          ],
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

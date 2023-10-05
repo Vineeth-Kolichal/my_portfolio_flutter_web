@@ -10,8 +10,9 @@ import '../../../../../widgets/export_widgets.dart';
 class DownloadResumeButton extends StatefulWidget {
   const DownloadResumeButton({
     super.key,
+    required this.resumeLink,
   });
-
+  final String resumeLink;
   @override
   State<DownloadResumeButton> createState() => _DownloadResumeButtonState();
 }
@@ -33,9 +34,8 @@ class _DownloadResumeButtonState extends State<DownloadResumeButton> {
           });
         },
         onTap: () {
-          html.AnchorElement anchorElement = html.AnchorElement(
-              href:
-                  'https://firebasestorage.googleapis.com/v0/b/my-portfolio-76a8d.appspot.com/o/Vineeth_Chandran_Flutter_Developer.pdf?alt=media&token=565dd280-0dad-4a2b-841d-6d27ae6e477d&_gl=1*e92abp*_ga*MTQyNDc5NzY5MS4xNjg3NTk3MzQ5*_ga_CW55HF8NVT*MTY5NjI0NzMwMi4xNzcuMS4xNjk2MjQ3MzE4LjQ0LjAuMA..');
+          html.AnchorElement anchorElement =
+              html.AnchorElement(href: widget.resumeLink);
           anchorElement.download = 'Vineeth_chandran_Resume';
           anchorElement.click();
         },
@@ -62,9 +62,8 @@ class _DownloadResumeButtonState extends State<DownloadResumeButton> {
     } else {
       return CircleButton(
         onTap: () {
-          html.AnchorElement anchorElement = html.AnchorElement(
-              href:
-                  'https://firebasestorage.googleapis.com/v0/b/my-portfolio-76a8d.appspot.com/o/Vineeth_Chandran_Flutter_Developer.pdf?alt=media&token=565dd280-0dad-4a2b-841d-6d27ae6e477d&_gl=1*e92abp*_ga*MTQyNDc5NzY5MS4xNjg3NTk3MzQ5*_ga_CW55HF8NVT*MTY5NjI0NzMwMi4xNzcuMS4xNjk2MjQ3MzE4LjQ0LjAuMA..');
+          html.AnchorElement anchorElement =
+              html.AnchorElement(href: widget.resumeLink);
           anchorElement.download = 'Vineeth_chandran_Resume';
           anchorElement.click();
         },

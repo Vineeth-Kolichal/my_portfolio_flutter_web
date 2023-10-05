@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<ProjectSectionCubit>().getProjects();
+    context.read<ProfileCubit>().getProfileData();
     Size size = MediaQuery.of(context).size;
     Timer(const Duration(milliseconds: 1500), () {
       positionNotifier.value = -(size.height / 2);

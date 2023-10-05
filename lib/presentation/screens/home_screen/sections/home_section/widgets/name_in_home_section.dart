@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 
 import '../../../../../../util/icons.dart';
 import '../../../../../widgets/export_widgets.dart';
@@ -86,7 +88,14 @@ class NameInHomeSection extends StatelessWidget {
                   icon: CustomIcons.github,
                 ),
                 Space.x(10),
-                const DownloadResumeButton()
+                 BlocSelector<ProfileCubit, ProfileState, String>(
+                  selector: (state) {
+                    return state.resumeLink;
+                  },
+                  builder: (context, state) {
+                    return DownloadResumeButton(resumeLink: state,);
+                  },
+                )
               ],
             ),
           )
@@ -95,4 +104,3 @@ class NameInHomeSection extends StatelessWidget {
     );
   }
 }
-
