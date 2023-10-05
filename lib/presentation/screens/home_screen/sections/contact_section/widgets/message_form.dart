@@ -1,4 +1,6 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../business_logic/export_cubit.dart';
@@ -44,21 +46,62 @@ class MessageForm extends StatelessWidget {
                   ),
                   yellowDivider,
                   MessageMeTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please fill your name";
+                      } else {
+                        return null;
+                      }
+                    },
                     type: TextInputType.name,
                     labelText: 'Your Name',
                     controller: sendmessage.nameController,
                   ),
                   MessageMeTextField(
+                    validator: (email) {
+                      if (email == null || email.isEmpty) {
+                        return 'Please fill email';
+                      } else {
+                        final validate = EmailValidator.validate(email);
+                        if (validate) {
+                          return null;
+                        } else {
+                          return "Enter correct email id";
+                        }
+                      }
+                    },
                     type: TextInputType.emailAddress,
                     labelText: 'e-mail',
                     controller: sendmessage.emailController,
                   ),
                   MessageMeTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please fill phone number";
+                      } else {
+                        if (value.length < 10) {
+                          return "Phone number shoud be 10 digits";
+                        } else {
+                          return null;
+                        }
+                      }
+                    },
+                    formatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                    ],
+                    maxLength: 10,
                     type: TextInputType.number,
                     labelText: 'Phone number',
                     controller: sendmessage.phoneController,
                   ),
                   MessageMeTextField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please fill your message";
+                      } else {
+                        return null;
+                      }
+                    },
                     type: TextInputType.multiline,
                     labelText: 'Your Message',
                     controller: sendmessage.messageController,
