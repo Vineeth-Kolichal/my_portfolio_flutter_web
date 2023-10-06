@@ -1,0 +1,2 @@
+const String fcmKey =
+    "key=AAAASocW24Q:APA91bHWZHSbMpPMvdkJtOrvUMNtK6bjR40CwqsnOwZkjkV1uzDJGR6oXge9lHu2zpbBKeHlPBHiIxgf8cuFF_9p_8D2wgL3o_DRE2ZChChjEgMT_I3ZOG-44HH3RbLOJ7YrBFt-xvoc";

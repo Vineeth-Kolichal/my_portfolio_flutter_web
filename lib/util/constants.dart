@@ -5,7 +5,7 @@ const yellowDivider = SizedBox(
   child: Divider(
     thickness: 2,
     height: 2,
-    color: Colors.yellow,
+    color: Color(0xFFFFEB3B),
   ),
 );
 
