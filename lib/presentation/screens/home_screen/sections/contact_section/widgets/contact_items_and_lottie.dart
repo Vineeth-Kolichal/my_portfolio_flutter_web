@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_portfolio_site/business_logic/export_cubit.dart';
 
@@ -113,7 +112,6 @@ class ContactDetailsAndLottie extends StatelessWidget {
                 ),
               ),
             ),
-            //SvgPicture.asset('assets/images/contact.svg'),
 
             // LottieBuilder.asset(
             //   'assets/lottie/contact.json',
