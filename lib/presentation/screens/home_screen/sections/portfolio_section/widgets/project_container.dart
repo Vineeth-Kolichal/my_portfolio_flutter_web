@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../data/models/project_model.dart';
@@ -21,6 +20,8 @@ class _ProjectContainerState extends State<ProjectContainer> {
   bool isHover = false;
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return InkWell(
       onHover: (value) {
         setState(() {
@@ -72,23 +73,39 @@ class _ProjectContainerState extends State<ProjectContainer> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        imageUrl: widget.projectModel.image,
-                        progressIndicatorBuilder:
-                            (context, url, downloadProgress) => Center(
-                          child: CircularProgressIndicator(
-                              strokeWidth: 2, value: downloadProgress.progress),
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          widget.projectModel.image,
+                          scale: size.width / size.height,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.image_not_supported_outlined,
+                                size: 50,
+                              ),
+                            ),
+                          ),
+                        )
+
+                        // CachedNetworkImage(
+                        //   fit: BoxFit.cover,
+                        //   imageUrl: widget.projectModel.image,
+                        //   progressIndicatorBuilder:
+                        //       (context, url, downloadProgress) => Center(
+                        //     child: CircularProgressIndicator(
+                        //         strokeWidth: 2, value: downloadProgress.progress),
+                        //   ),
+                        //   errorWidget: (context, url, error) {
+                        //     return const Icon(
+                        //       Icons.image_not_supported_outlined,
+                        //       size: 40,
+                        //     );
+                        //   },
+                        // ),
+
                         ),
-                        errorWidget: (context, url, error) {
-                          return const Icon(
-                            Icons.image_not_supported_outlined,
-                            size: 40,
-                          );
-                        },
-                      ),
-                    ),
                   ),
                   Space.y(10),
                   ConstrainedBox(
