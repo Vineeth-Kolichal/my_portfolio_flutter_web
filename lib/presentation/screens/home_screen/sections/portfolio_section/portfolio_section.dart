@@ -38,13 +38,12 @@ class PortfolioSection extends StatelessWidget {
                       builder: (context, state) {
                         return GridView.count(
                           physics: const NeverScrollableScrollPhysics(),
-                          childAspectRatio: 0.8,
+                          childAspectRatio: ((constraints.maxWidth > 1024) &&
+                                  (constraints.maxWidth < 1400))
+                              ? 0.75
+                              : 0.8,
                           shrinkWrap: true,
-                          crossAxisCount: Responsive.isDestop(context)
-                              ? 4
-                              : Responsive.isTabltet(context)
-                                  ? 2
-                                  : 1,
+                          crossAxisCount: gridCount(constraints),
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 20.0,
                           children:
@@ -65,5 +64,18 @@ class PortfolioSection extends StatelessWidget {
         },
       ),
     );
+  }
+
+  int gridCount(BoxConstraints constraints) {
+    if (constraints.maxWidth > 1400) {
+      return 4;
+    } else if ((constraints.maxWidth > 1024) &&
+        (constraints.maxWidth <= 1400)) {
+      return 3;
+    } else if ((constraints.maxWidth > 500) && (constraints.maxWidth <= 1024)) {
+      return 2;
+    } else {
+      return 1;
+    }
   }
 }

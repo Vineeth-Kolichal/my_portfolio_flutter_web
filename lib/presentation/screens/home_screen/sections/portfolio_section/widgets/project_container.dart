@@ -37,7 +37,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
           curve: Curves.fastEaseInToSlowEaseOut,
           duration: const Duration(milliseconds: 500),
           width: isHover ? 380 : 330,
-          height: isHover || !Responsive.isDestop(context) ? 425 : 400,
+          // height: isHover || !Responsive.isDestop(context) ? 425 : 400,
           decoration: BoxDecoration(
             gradient: isHover
                 ? null
@@ -77,6 +77,7 @@ class _ProjectContainerState extends State<ProjectContainer> {
                         child: Image.network(
                           widget.projectModel.image,
                           scale: size.width / size.height,
+                          fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) =>
                               const Center(
                             child: Padding(
