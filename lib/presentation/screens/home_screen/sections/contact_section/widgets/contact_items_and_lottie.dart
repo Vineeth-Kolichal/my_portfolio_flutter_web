@@ -34,19 +34,12 @@ class ContactDetailsAndLottie extends StatelessWidget {
                   context.read<PointerMoveCubit>().setWidthZero(30);
                 }
               },
-              child: ElevatedBoxWidget(
+              child: ElevatedBoxWidget(title: 'Get in touch',
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
-                      'Get in touch',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 25,
-                      ),
-                    ),
-                    yellowDivider,
+                   
                     const ContactTypeTile(
                       content:
                           'Erinhilamkode (H),\nKolichal (PO),\nRajapuram (via), \nKasaragod (DT),\nKerala, 671532 ',

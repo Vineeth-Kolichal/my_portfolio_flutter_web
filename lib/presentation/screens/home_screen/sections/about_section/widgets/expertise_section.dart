@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,32 +15,24 @@ class ExpertiseSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: Responsive.isDestop(context) ? null : constraints.maxWidth * 0.9,
-      child: ElevatedBoxWidget(
+      child: const ElevatedBoxWidget(
+        title: 'My Expertise',
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'My Expertise',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 25,
-              ),
-            ),
-            yellowDivider,
-            Space.y(20),
-            const ExpertiseItems(
+            ExpertiseItems(
               icon: Icons.android_rounded,
               heading: 'Android App development',
               content:
                   'Experienced Flutter developer skilled in all aspects of Android app development, from design to implementation, with a strong focus on quality and timely delivery. ',
             ),
-            const ExpertiseItems(
+            ExpertiseItems(
               icon: Icons.apple,
               heading: 'iOS App development',
               content:
                   'Expert in designing, developing, and delivering high-quality iOS apps on time and within budget. Expertise in building user-friendly and visually appealing interfaces, as well as optimizing performance and scalability. ',
             ),
-            const ExpertiseItems(
+            ExpertiseItems(
               icon: Icons.web,
               heading: 'Web designing',
               content:
@@ -59,4 +50,3 @@ class ExpertiseSectionWidget extends StatelessWidget {
     );
   }
 }
-

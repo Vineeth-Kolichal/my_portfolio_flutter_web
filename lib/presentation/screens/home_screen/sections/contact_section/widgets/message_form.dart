@@ -31,20 +31,13 @@ class MessageForm extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ElevatedBoxWidget(
+            title: "Message to me",
             child: Form(
               key: sendmessage.formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    'Message to me',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 25,
-                    ),
-                  ),
-                  yellowDivider,
                   MessageMeTextField(
                     validator: (value) {
                       if (value == null || value.isEmpty) {

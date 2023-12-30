@@ -111,12 +111,27 @@ class _ProjectContainerState extends State<ProjectContainer> {
                   Space.y(10),
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 280),
-                    child: Text(
-                      maxLines: 5,
-                      widget.projectModel.description,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 12),
+                    child: InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (ctx) => SizedBox(
+                                  width: size.width * 0.5,
+                                  child: AlertDialog(
+                                    title:
+                                        Text(widget.projectModel.projectName),
+                                    content:
+                                        Text(widget.projectModel.description),
+                                  ),
+                                ));
+                      },
+                      child: Text(
+                        maxLines: 5,
+                        widget.projectModel.description,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 12),
+                      ),
                     ),
                   ),
                   Visibility(

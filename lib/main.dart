@@ -40,10 +40,12 @@ class MyPortfolio extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            useMaterial3: true,
-            primarySwatch: Colors.yellow,
-            brightness: Brightness.dark,
-            fontFamily: GoogleFonts.montserrat().fontFamily),
+          useMaterial3: true,
+          primarySwatch: Colors.yellow,
+          brightness: Brightness.dark,
+          //fontFamily: GoogleFonts.montserrat().fontFamily,
+          fontFamily: GoogleFonts.poppins().fontFamily,
+        ),
         initialRoute: "/",
         home: const HomeScreen(),
       ),

@@ -25,18 +25,10 @@ class ColumnOne extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ElevatedBoxWidget(
+                  title: "Who am I?",
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Who am I ?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 25,
-                        ),
-                      ),
-                      yellowDivider,
-                      Space.y(10),
                       Text(
                         state.whoAmI,
                         style: const TextStyle(fontSize: 16, height: 1.5),
@@ -46,33 +38,27 @@ class ColumnOne extends StatelessWidget {
                 ),
                 Space.y(30),
                 ElevatedBoxWidget(
+                    title: "Skills",
                     child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Skills',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 25,
-                      ),
-                    ),
-                    yellowDivider,
-                    Space.y(10),
-                    const Text('Expert-in',
-                        style: TextStyle(fontSize: 20, color: Colors.yellow)),
-                    Text(
-                      state.expertIn,
-                      style: const TextStyle(fontSize: 16, height: 1.7),
-                    ),
-                    Space.y(10),
-                    const Text('Familiar-with',
-                        style: TextStyle(fontSize: 20, color: Colors.yellow)),
-                    Text(
-                      state.familiarWith,
-                      style: const TextStyle(fontSize: 16, height: 1.7),
-                    ),
-                  ],
-                ))
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Expert-in',
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.yellow)),
+                        Text(
+                          state.expertIn,
+                          style: const TextStyle(fontSize: 16, height: 1.7),
+                        ),
+                        Space.y(10),
+                        const Text('Familiar-with',
+                            style:
+                                TextStyle(fontSize: 20, color: Colors.yellow)),
+                        Text(
+                          state.familiarWith,
+                          style: const TextStyle(fontSize: 16, height: 1.7),
+                        ),
+                      ],
+                    ))
               ],
             ),
           ),

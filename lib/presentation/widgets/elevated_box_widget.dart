@@ -1,12 +1,16 @@
-
 import 'package:flutter/material.dart';
+import 'package:my_portfolio_site/util/constants.dart';
+
+import 'space.dart';
 
 class ElevatedBoxWidget extends StatelessWidget {
   const ElevatedBoxWidget({
+    required this.title,
     super.key,
     required this.child,
   });
   final Widget child;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -27,7 +31,21 @@ class ElevatedBoxWidget extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
-          child: child,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 25,
+                ),
+              ),
+              yellowDivider,
+              Space.y(10),
+              child,
+            ],
+          ),
         ),
       ),
     );
