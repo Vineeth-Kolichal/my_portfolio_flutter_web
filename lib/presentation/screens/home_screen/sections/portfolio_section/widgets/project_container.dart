@@ -115,14 +115,92 @@ class _ProjectContainerState extends State<ProjectContainer> {
                       onTap: () {
                         showDialog(
                             context: context,
-                            builder: (ctx) => SizedBox(
-                                  width: size.width * 0.5,
-                                  child: AlertDialog(
-                                    title:
-                                        Text(widget.projectModel.projectName),
-                                    content:
-                                        Text(widget.projectModel.description),
-                                  ),
+                            builder: (ctx) => Dialog(
+                                  child: Container(
+                                      padding: EdgeInsets.all(20),
+                                      height: size.width * 0.25,
+                                      width: size.width * 0.5,
+                                      child: Row(
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                widget.projectModel.projectName,
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 25,
+                                                ),
+                                              ),
+                                              yellowDivider,
+                                              Space.y(10),
+                                              Container(
+                                                width: 390,
+                                                height: 210,
+                                                decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      255, 54, 54, 54),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    child: Image.network(
+                                                      widget.projectModel.image,
+                                                      scale: size.width /
+                                                          size.height,
+                                                      fit: BoxFit.cover,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          const Center(
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  10.0),
+                                                          child: Icon(
+                                                            Icons
+                                                                .image_not_supported_outlined,
+                                                            size: 50,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+
+                                                    // CachedNetworkImage(
+                                                    //   fit: BoxFit.cover,
+                                                    //   imageUrl: widget.projectModel.image,
+                                                    //   progressIndicatorBuilder:
+                                                    //       (context, url, downloadProgress) => Center(
+                                                    //     child: CircularProgressIndicator(
+                                                    //         strokeWidth: 2, value: downloadProgress.progress),
+                                                    //   ),
+                                                    //   errorWidget: (context, url, error) {
+                                                    //     return const Icon(
+                                                    //       Icons.image_not_supported_outlined,
+                                                    //       size: 40,
+                                                    //     );
+                                                    //   },
+                                                    // ),
+
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                          Space.x(20),
+                                          Expanded(
+                                            child: Column(
+                                              children: [
+                                                Text(widget
+                                                    .projectModel.description),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      )),
                                 ));
                       },
                       child: Text(
